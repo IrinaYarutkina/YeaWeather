@@ -17,13 +17,13 @@
             aria-label="WeatherMe - Главная страница"
           >
             <img
-              src="/assets/images/cloud_logo.svg"
+              src="assets/images/cloud_logo.svg"
               alt="WeatherMe - Прогноз погоды"
               width="65"
               class="header__logo-icon"
             />
-            <span class="header__logo-text"> WeatherMe </span>
           </a>
+          <span class="header__text"> WeatherMe </span>
           <div id="clock">00:00</div>
           <!-- переключатель -->
           <div class="header__switch">
@@ -37,7 +37,6 @@
           <ul class="header__menu">
             <li class="header__menu-item">Сегодня</li>
             <li class="header__menu-item">Завтра</li>
-            <li class="header__menu-item">На месяц</li>
           </ul>
         </div>
       </nav>
@@ -49,53 +48,81 @@
           <input
             type="search"
             class="search__input"
-            placeholder="Введите город..."
+            id="search__input"
+            placeholder="Введите название города..."
           />
         </form>
-        <button type="submit" class="search__button">Найти</button>
+        <button type="submit" class="search__button" id="search__button">
+          Найти
+        </button>
       </div>
 
-      <!-- слайдер карточки городов -->
-      <section class="slider">
-        <button class="slider__btn back">
-          <svg
-            width="26"
-            height="42"
-            viewBox="0 0 26 42"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M21 5L5 21L21 37"
-              stroke="black"
-              stroke-width="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+      <!-- основная карточка погоды -->
+      <section class="weather-card">
+        <div class="weather-card__meta">
+          <div class="weather-card__city">
+            <span id="weather-city-name">Город</span>
+            <img
+              src="/YeaWeather/assets/images/city.svg"
+              alt="location"
+              class="city__icon"
             />
-          </svg>
-        </button>
-
-        <ul class="slider__list">
-          <li class="slider__item"></li>
-        </ul>
-
-        <button class="slider__btn next">
-          <svg
-            width="26"
-            height="42"
-            viewBox="0 0 26 42"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          </div>
+          <div class="weather-card__datetime">
+            <div class="weather-card__date" id="weather-card__date">
+              Текущая дата
+            </div>
+            <!-- <div class="weather-card__time" id="weather-card__time">
+              Местное время
+            </div> -->
+          </div>
+        </div>
+        <div class="weather-card__temperature">
+          <img
+            class="weather-card__temperature-icon"
+            src="/YeaWeather/assets/images/temperature_icon.png"
+            alt="Температура"
+          />
+          <span
+            class="weather-card__temperature-value"
+            id="weather-card__temperature"
           >
-            <path
-              d="M5 37L21 21L5 5"
-              stroke="black"
-              stroke-width="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </button>
+            Температура
+          </span>
+          <img
+            class="weather-card__weather-icon"
+            id="weather-card__weather-icon"
+            src=""
+            alt="Иконка погоды"
+          />
+        </div>
+
+        <div class="weather-card__details">
+          <span
+            class="weather-card__detail weather-card__detail-label--humidity"
+            >Влажность</span
+          >
+          <span
+            class="weather-card__detail weather-card__detail-label--pressure"
+            >Атм. давление</span
+          >
+          <span class="weather-card__detail weather-card__detail-label--wind"
+            >Ветер</span
+          >
+          <!-- динамические данные -->
+          <span
+            class="weather-card__detail weather-card__detail-value--humidity"
+            id="humidity"
+          ></span>
+          <span
+            class="weather-card__detail weather-card__detail-value--pressure"
+            id="pressure"
+          ></span>
+          <span
+            class="weather-card__detail weather-card__detail-value--wind"
+            id="wind"
+          ></span>
+        </div>
       </section>
 
       <!-- погода по часам -->
@@ -103,33 +130,33 @@
         <!-- шесть карточек -->
         <ul class="weather-hour__list">
           <li class="weather-hour__list-card">
-            <div class="weather__card-bottom"></div>
+            <div class="weather__dark-bottom"></div>
           </li>
           <li class="weather-hour__list-card">
-            <div class="weather__card-bottom"></div>
+            <div class="weather__dark-bottom"></div>
           </li>
           <li class="weather-hour__list-card">
-            <div class="weather__card-bottom"></div>
+            <div class="weather__dark-bottom"></div>
           </li>
           <li class="weather-hour__list-card">
-            <div class="weather__card-bottom"></div>
+            <div class="weather__dark-bottom"></div>
           </li>
           <li class="weather-hour__list-card">
-            <div class="weather__card-bottom"></div>
+            <div class="weather__dark-bottom"></div>
           </li>
           <li class="weather-hour__list-card">
-            <div class="weather__card-bottom"></div>
+            <div class="weather__dark-bottom"></div>
           </li>
         </ul>
       </div>
     </main>
     <footer class="footer">
       <div class="footer__container">
-        <p class="footer__description">Данные использованы погодным API.</p>
+        <p class="footer__description">Данные использованы OpenWeatherAPI.</p>
         <div class="footer__copy">© 2026 WeatherMe. Учебный проект</div>
       </div>
     </footer>
 
-    <script src="/script.js"></script>
+    <script src="/YeaWeather/script.js"></script>
   </body>
 </html>

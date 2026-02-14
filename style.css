@@ -21,6 +21,7 @@ body {
   /* gap: 16px; */
   /* min-height: 100vh; */
   background-color: #252323;
+  margin: 0;
 }
 .header__nav {
   display: flex;
@@ -176,7 +177,7 @@ body {
   align-items: center;
   margin: 30px auto 35px;
   border-radius: 32px;
-  width: 817px;
+  max-width: 950px;
   height: 425px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25),
     0 4px 4px 0 rgba(255, 250, 250, 0.25), 0 4px 4px 0 rgba(253, 245, 245, 0.25);
@@ -248,24 +249,43 @@ body {
   align-items: flex-end;
   gap: 12px;
   list-style: none;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 .weather-hour__list-card {
+  position: relative;
   border-radius: 25px;
-  width: 121px;
-  height: 118px;
+  width: 125px;
+  height: 120px;
+  overflow: hidden;
   background: linear-gradient(180deg, #b32dd4 0%, rgba(217, 217, 217, 0) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
-.weather__dark-bottom {
+.weather-hour__info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 17px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: #ffffff;
+}
+.weather-hour__dark-bottom {
   position: absolute;
   bottom: 0;
   left: 0;
   border-radius: 25px;
-  width: 121px;
-  height: 72px;
+  width: 100%;
+  height: 40%; /*72px; */
   backdrop-filter: blur(9px);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   background: linear-gradient(128deg, #373333 0%, rgba(55, 51, 51, 0) 100%);

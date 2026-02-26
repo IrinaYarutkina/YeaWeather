@@ -1,0 +1,8 @@
+.weather-hour__list::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-slider-button._prev[hidden],
+.scroll-slider-button._next[hidden] {
+  display: none;
+}

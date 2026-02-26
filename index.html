@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>YeaWeather</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./normalize.css" />
   </head>
   <body>
     <header class="header">
@@ -44,17 +45,17 @@
     <main>
       <!-- форма поиска -->
       <div class="search">
-        <form action="/search" method="GET">
+        <form action="/search" method="GET" onsubmit="performSearch(event)">
           <input
             type="search"
             class="search__input"
             id="search__input"
             placeholder="Введите название города..."
           />
+          <button type="submit" class="search__button" id="search__button">
+            Найти
+          </button>
         </form>
-        <button type="submit" class="search__button" id="search__button">
-          Найти
-        </button>
       </div>
 
       <!-- основная карточка погоды -->
@@ -63,7 +64,7 @@
           <div class="weather-card__city">
             <span id="weather-city-name">Город</span>
             <img
-              src="/YeaWeather/assets/images/city.svg"
+              src="./assets/images/city.svg"
               alt="location"
               class="city__icon"
             />
@@ -80,7 +81,7 @@
         <div class="weather-card__temperature">
           <img
             class="weather-card__temperature-icon"
-            src="/YeaWeather/assets/images/temperature_icon.png"
+            src="./assets/images/temperature_icon.png"
             alt="Температура"
           />
           <span
@@ -125,36 +126,57 @@
         </div>
       </section>
 
-      <!-- погода по часам -->
+      <!-- погода через каждые три часа -->
       <div class="weather-hour">
-        <!-- шесть карточек -->
-        <ul class="weather-hour__list">
-          <li class="weather-hour__list-card">
-            <div class="weather-hour__dark-bottom"></div>
-          </li>
-          <li class="weather-hour__list-card">
-            <div class="weather-hour__info">
-              <span> время </span>
-              <img class="weather-hour__info-icon" src="" alt="погода" />
-              <span> temp</span>
-            </div>
-            <div class="weather-hour__dark-bottom"></div>
-          </li>
-          <li class="weather-hour__list-card">
-            <div class="weather-hour__dark-bottom"></div>
-          </li>
-          <li class="weather-hour__list-card">
-            <div class="weather-hour__dark-bottom"></div>
-          </li>
-          <li class="weather-hour__list-card">
-            <div class="weather-hour__dark-bottom"></div>
-          </li>
-          <li class="weather-hour__list-card">
-            <div class="weather-hour__dark-bottom"></div>
-          </li>
-        </ul>
+        <scroll-slider class="scroll-slider">
+          <scroll-slider-prev-button
+            tabindex="0"
+            hidden
+            class="scroll-slider-button _prev"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </scroll-slider-prev-button>
+          <scroll-slider-next-button
+            tabindex="0"
+            class="scroll-slider-button _next"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </scroll-slider-next-button>
+
+          <!-- cлайдер с краточками -->
+          <scroll-slider-track class="weather-hour__list">
+            <article class="weather-hour__list-card">
+              <div class="weather-hour__info">
+                <span> время </span>
+                <img class="weather-hour__info-icon" src="" alt="погода" />
+                <span> temp</span>
+              </div>
+            </article>
+          </scroll-slider-track>
+        </scroll-slider>
       </div>
     </main>
+
     <footer class="footer">
       <div class="footer__container">
         <p class="footer__description">Данные использованы OpenWeatherAPI.</p>
@@ -162,6 +184,6 @@
       </div>
     </footer>
 
-    <script src="/YeaWeather/script.js"></script>
+    <script type="module" src="./script.js"></script>
   </body>
 </html>

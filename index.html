@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>YeaWeather</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./normalize.css" />
+    <link rel="stylesheet" href="/Style/style.css" />
+    <link rel="stylesheet" href="/Style/normalize.css" />
   </head>
   <body>
     <header class="header">
@@ -13,7 +13,7 @@
         <!-- левая часть -->
         <div class="header__nav-left">
           <a
-            href="/"
+            href="/index.html"
             class="header__logo"
             aria-label="WeatherMe - Главная страница"
           >
@@ -36,8 +36,15 @@
         <!-- правая часть -->
         <div class="header__nav-right">
           <ul class="header__menu">
-            <li class="header__menu-item">Сегодня</li>
-            <li class="header__menu-item">Завтра</li>
+            <li class="header__menu-item">
+              <a class="header__menu-link" href="/index.html">Сегодня</a>
+            </li>
+            <li class="header__menu-item">
+              <a class="header__menu-link" href="">Завтра</a>
+            </li>
+            <li class="header__menu-item">
+              <a class="header__menu-link" href="/week.html">На 5 дней</a>
+            </li>
           </ul>
         </div>
       </nav>

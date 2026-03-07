@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Погода на неделю</title>
+    <link rel="stylesheet" href="/Style/style.css" />
+    <link rel="stylesheet" href="/Style/week.css" />
+    <link rel="stylesheet" href="/Style/normalize.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="header__nav">
+        <!-- левая часть -->
+        <div class="header__nav-left">
+          <a
+            href="/index.html"
+            class="header__logo"
+            aria-label="WeatherMe - Главная страница"
+          >
+            <img
+              src="assets/images/cloud_logo.svg"
+              alt="WeatherMe - Прогноз погоды"
+              width="65"
+              class="header__logo-icon"
+            />
+          </a>
+          <span class="header__text"> WeatherMe </span>
+          <div id="clock">00:00</div>
+          <!-- переключатель -->
+          <div class="header__switch">
+            <span class="header__switch-label header__switch-c">°C</span>
+            <div class="header__switch-toggle"></div>
+            <span class="header__switch-label header__switch-f">°F</span>
+          </div>
+        </div>
+        <!-- правая часть -->
+        <div class="header__nav-right">
+          <ul class="header__menu">
+            <li class="header__menu-item">
+              <a class="header__menu-link" href="/index.html">Сегодня</a>
+            </li>
+            <li class="header__menu-item">
+              <a class="header__menu-link" href="">Завтра</a>
+            </li>
+            <li class="header__menu-item">
+              <a class="header__menu-link" href="/week.html">На 5 дней</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <h1 class="forecast__title">Погода на ближайшие дни</h1>
+      <div class="search">
+        <form action="/search" method="GET" onsubmit="performSearch(event)">
+          <input
+            type="search"
+            class="search__input"
+            id="search__input"
+            placeholder="Введите название города..."
+          />
+          <button type="submit" class="search__button" id="search__button">
+            Найти
+          </button>
+        </form>
+      </div>
+
+      <!-- контейнер для 5 карточек -->
+      <div class="forecast__week">
+        <!-- одна карточка -->
+        <!-- <div class="forecast__day">
+          <span class="forecast__day-info forecast__day-info--day"> День </span>
+          <span class="forecast__day-info forecast__day-info--night">
+            Ночь
+          </span>
+
+          <span class="forecast__day-weekday"> День недели </span>
+          <span class="forecast__day-date"> Дата </span>
+
+          <div class="forecast__day-temp forecast__day-temp--day">
+            <span class="forecast__day-tempValue"> temp day </span>
+            <img class="forecast__day-tempIcon" src="" alt="Температура днём" />
+          </div>
+
+          <div class="forecast__day-temp forecast__day-temp--night">
+            <span class="forecast__day-tempValue"> temp night </span>
+            <img
+              class="forecast__day-tempIcon"
+              src=""
+              alt="Температура ночью"
+            />
+          </div>
+        </div> -->
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer__container">
+        <p class="footer__description">Данные использованы OpenWeatherAPI.</p>
+        <div class="footer__copy">© 2026 WeatherMe. Учебный проект</div>
+      </div>
+    </footer>
+    <script src="./Scripts/week.js"></script>
+  </body>
+</html>

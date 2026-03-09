@@ -145,6 +145,7 @@ main {
 .header__menu-item a:hover {
   font-weight: 700;
   background: linear-gradient(135deg, #ad36cb 0%, #4a6dff 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -189,15 +190,15 @@ main {
   background: linear-gradient(135deg, #ad36cb 0%, #4a6dff 100%);
 }
 
-.weather-card {
+.weather__card {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   margin: 40px auto 45px;
   border-radius: 32px;
-  max-width: 950px;
-  height: 425px;
+  width: clamp(220px, 90vw, 950px);
+  min-height: clamp(250px, 40vw, 425px);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25),
     0 4px 4px 0 rgba(255, 250, 250, 0.25), 0 4px 4px 0 rgba(253, 245, 245, 0.25);
   background: linear-gradient(
@@ -207,12 +208,12 @@ main {
     #333 90.38%
   );
 }
-.weather-card__meta {
+.weather__card__meta {
   display: flex;
   justify-content: space-around;
   width: 100%;
 }
-.weather-card__city {
+.weather__card__city {
   font-size: clamp(18px, 3vw, 30px);
   font-family: "Poppins", sans-serif;
   font-weight: 300;
@@ -221,28 +222,28 @@ main {
   align-items: center;
   gap: 8px;
 }
-.weather-card__date {
+.weather__card__date {
   font-size: clamp(14px, 2vw, 20px);
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   color: #ffffff;
 }
-.weather-card__temperature {
+.weather__card__temperature {
   display: flex;
   align-items: center;
 }
-.weather-card__temperature-value {
+.weather__card__temperature-value {
   font-size: clamp(40px, 6vw, 70px);
   font-family: "Poppins", sans-serif;
   font-weight: 200;
   color: #f2f1f1;
   margin: 0 10px 0 25px;
 }
-.weather-card__weather-icon {
+.weather__card__weather-icon {
   width: 80px;
   height: 80px;
 }
-.weather-card__details {
+.weather__card__details {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -296,7 +297,7 @@ main {
   border-radius: 25px;
   width: clamp(90px, 18vw, 130px);
   height: clamp(90px, 18vw, 120px);
-  padding: 15px;
+
   overflow: hidden;
   background: linear-gradient(180deg, #b32dd4 0%, rgba(217, 217, 217, 0) 100%);
   display: flex;
@@ -307,22 +308,20 @@ main {
 }
 .weather-hour__info {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  font-size: clamp(12px, 1.8vw, 17px);
+  font-size: clamp(12px, 2vw, 20px);
+  padding: 10px 0;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   color: #ffffff;
 }
 .weather-hour__info-icon {
-  width: clamp(30px, 50vw, 100px);
+  width: clamp(40px, 6vw, 70px);
   height: auto;
 }
 .weather-hour__dark-bottom {
@@ -331,7 +330,8 @@ main {
   left: 0;
   border-radius: 25px;
   width: 100%;
-  height: 40%; /*72px; */
+  height: 40%;
+  max-height: 72px;
   backdrop-filter: blur(9px);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   background: linear-gradient(128deg, #373333 0%, rgba(55, 51, 51, 0) 100%);
@@ -384,13 +384,22 @@ main {
   height: 24px;
 }
 .footer {
+  width: 100%;
   margin-top: auto;
+  padding: 20px 0;
+}
+
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .footer__description,
 .footer__copy {
-  display: flex;
-  justify-content: center;
   color: #524e4e;
+  margin: 5px 0;
+  text-align: center;
 }
 .footer__copy {
   padding-bottom: 20px;
@@ -402,11 +411,6 @@ main {
   }
   .search__input {
     width: 500px;
-  }
-  .weather-card {
-    max-width: 720px;
-    height: 330px;
-    padding: 30px 20px;
   }
   .weather-hour {
     max-width: 700px;
@@ -446,11 +450,8 @@ main {
     padding: 10px 20px;
     margin-left: 5px;
   }
-  .weather-card {
-    max-width: 600px;
-    height: 250px;
-  }
-  .weather-card__meta {
+
+  .weather__card__meta {
     flex-direction: column;
     gap: 10px;
     align-items: center;
@@ -463,13 +464,12 @@ main {
     height: 40px;
   }
 }
-
 @media (max-width: 649px) {
   .search {
     margin-left: 16px;
     margin-right: 16px;
   }
-  .weather-card {
+  .weather__card {
     margin-left: 16px;
     margin-right: 16px;
   }
@@ -486,23 +486,23 @@ main {
   .search__button {
     display: none;
   }
-  .weather-card__temperature-icon {
+  .weather__card__temperature-icon {
     width: 15px;
   }
-  .weather-card__details {
+  .weather__card__details {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(3, auto);
   }
 
-  .weather-card__detail-label--humidity {
+  .weather__card__detail-label--humidity {
     grid-column: 1/2;
     grid-row: 1/2;
   }
-  .weather-card__detail-label--pressure {
+  .weather__card__detail-label--pressure {
     grid-column: 1/2;
     grid-row: 2/3;
   }
-  .weather-card__detail-label--wind {
+  .weather__card__detail-label--wind {
     grid-column: 1/2;
     grid-row: 3/4;
   }

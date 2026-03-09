@@ -24,7 +24,7 @@
               class="header__logo-icon"
             />
           </a>
-          <span class="header__text"> WeatherMe </span>
+          <a class="header__text" href="/index.html"> WeatherMe </a>
           <div id="clock">00:00</div>
           <!-- переключатель -->
           <div class="header__switch">
@@ -40,10 +40,12 @@
               <a class="header__menu-link" href="/index.html">Сегодня</a>
             </li>
             <li class="header__menu-item">
-              <a class="header__menu-link" href="">Завтра</a>
+              <a href="#" class="header__menu-link" id="tomorrow">Завтра</a>
             </li>
             <li class="header__menu-item">
-              <a class="header__menu-link" href="/week.html">На 5 дней</a>
+              <a class="header__menu-link" id="weekLink" href="/week.html"
+                >На 5 дней</a
+              >
             </li>
           </ul>
         </div>
@@ -52,7 +54,8 @@
     <main>
       <!-- форма поиска -->
       <div class="search">
-        <form action="/search" method="GET" onsubmit="performSearch(event)">
+        <form>
+          <!-- action="/search" method="GET" onsubmit="performSearch(event)" -->
           <input
             type="search"
             class="search__input"
@@ -66,68 +69,63 @@
       </div>
 
       <!-- основная карточка погоды -->
-      <section class="weather-card">
-        <div class="weather-card__meta">
-          <div class="weather-card__city">
-            <span id="weather-city-name">Город</span>
+      <section class="weather__card">
+        <div class="weather__card__meta">
+          <div class="weather__card__city">
+            <span id="weather-city-name">город</span>
             <img
               src="./assets/images/city.svg"
               alt="location"
               class="city__icon"
             />
           </div>
-          <div class="weather-card__datetime">
-            <div class="weather-card__date" id="weather-card__date">
-              Текущая дата
-            </div>
-            <!-- <div class="weather-card__time" id="weather-card__time">
-              Местное время
-            </div> -->
+          <div class="weather__card__datetime">
+            <div class="weather__card__date" id="weather__card__date">дата</div>
           </div>
         </div>
-        <div class="weather-card__temperature">
+        <div class="weather__card__temperature">
           <img
-            class="weather-card__temperature-icon"
+            class="weather__card__temperature-icon"
             src="./assets/images/temperature_icon.png"
             alt="Температура"
           />
           <span
-            class="weather-card__temperature-value"
-            id="weather-card__temperature"
+            class="weather__card__temperature-value"
+            id="weather__card__temperature"
           >
-            Температура
+            t
           </span>
           <img
-            class="weather-card__weather-icon"
-            id="weather-card__weather-icon"
+            class="weather__card__weather-icon"
+            id="weather__card__weather-icon"
             src=""
             alt="Иконка погоды"
           />
         </div>
 
-        <div class="weather-card__details">
+        <div class="weather__card__details">
           <span
-            class="weather-card__detail weather-card__detail-label--humidity"
+            class="weather__card__detail weather__card__detail-label--humidity"
             >Влажность</span
           >
           <span
-            class="weather-card__detail weather-card__detail-label--pressure"
+            class="weather__card__detail weather__card__detail-label--pressure"
             >Атм. давление</span
           >
-          <span class="weather-card__detail weather-card__detail-label--wind"
+          <span class="weather__card__detail weather__card__detail-label--wind"
             >Ветер</span
           >
           <!-- динамические данные -->
           <span
-            class="weather-card__detail weather-card__detail-value--humidity"
+            class="weather__card__detail weather__card__detail-value--humidity"
             id="humidity"
           ></span>
           <span
-            class="weather-card__detail weather-card__detail-value--pressure"
+            class="weather__card__detail weather__card__detail-value--pressure"
             id="pressure"
           ></span>
           <span
-            class="weather-card__detail weather-card__detail-value--wind"
+            class="weather__card__detail weather__card__detail-value--wind"
             id="wind"
           ></span>
         </div>
@@ -172,13 +170,13 @@
 
           <!-- cлайдер с краточками -->
           <scroll-slider-track class="weather-hour__list">
-            <article class="weather-hour__list-card">
+            <!-- <article class="weather-hour__list-card">
               <div class="weather-hour__info">
                 <span> время </span>
                 <img class="weather-hour__info-icon" src="" alt="погода" />
                 <span> temp</span>
               </div>
-            </article>
+            </article> -->
           </scroll-slider-track>
         </scroll-slider>
       </div>

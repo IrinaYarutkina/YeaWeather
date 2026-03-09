@@ -25,7 +25,7 @@
               class="header__logo-icon"
             />
           </a>
-          <span class="header__text"> WeatherMe </span>
+          <a class="header__text" href="/index.html"> WeatherMe </a>
           <div id="clock">00:00</div>
           <!-- переключатель -->
           <div class="header__switch">
@@ -54,7 +54,7 @@
     <main>
       <h1 class="forecast__title">Погода на ближайшие дни</h1>
       <div class="search">
-        <form action="/search" method="GET" onsubmit="performSearch(event)">
+        <form action="/search" method="GET">
           <input
             type="search"
             class="search__input"
@@ -70,29 +70,6 @@
       <!-- контейнер для 5 карточек -->
       <div class="forecast__week">
         <!-- одна карточка -->
-        <!-- <div class="forecast__day">
-          <span class="forecast__day-info forecast__day-info--day"> День </span>
-          <span class="forecast__day-info forecast__day-info--night">
-            Ночь
-          </span>
-
-          <span class="forecast__day-weekday"> День недели </span>
-          <span class="forecast__day-date"> Дата </span>
-
-          <div class="forecast__day-temp forecast__day-temp--day">
-            <span class="forecast__day-tempValue"> temp day </span>
-            <img class="forecast__day-tempIcon" src="" alt="Температура днём" />
-          </div>
-
-          <div class="forecast__day-temp forecast__day-temp--night">
-            <span class="forecast__day-tempValue"> temp night </span>
-            <img
-              class="forecast__day-tempIcon"
-              src=""
-              alt="Температура ночью"
-            />
-          </div>
-        </div> -->
       </div>
     </main>
     <footer class="footer">

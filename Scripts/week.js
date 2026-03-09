@@ -9,7 +9,13 @@ function getNow() {
   return new Date();
 }
 const forecastWeek = document.querySelector(".forecast__week");
+const params = new URLSearchParams(window.location.search);
 
+let city = params.get("city") || localStorage.getItem("weatherCity");
+if (city) {
+  inputCity.value = city;
+  getDataForWeek(city);
+}
 //текущее время
 function updateTime() {
   const hours = String(getNow().getHours()).padStart(2, "0");
@@ -142,17 +148,25 @@ function createForecastCard(day, isFirst = false) {
   </div>
 
     <div class="forecast__day-temp forecast__day-temp--day">
-      <p class="forecast__day-tempValue">${updateTemperature(day.dayTemp)}</p>
-      <img class="forecast__day-tempIcon"
-        src="${day.dayIcon}"
-        alt="Температура днём" />
+      <p class="forecast__day-tempText"> День </p>
+      <div class="forecast__day-temp-right">
+        <p class="forecast__day-tempValue">${updateTemperature(day.dayTemp)}</p>
+        <img class="forecast__day-tempIcon"
+          src="${day.dayIcon}"
+          alt="Температура днём" />
+      </div>
     </div>
 
     <div class="forecast__day-temp forecast__day-temp--night">
-      <p class="forecast__day-tempValue">${updateTemperature(day.nightTemp)}</p>
-      <img class="forecast__day-tempIcon"
-        src="${day.nightIcon}"
-        alt="Температура ночью" />
+      <p class="forecast__day-tempText"> Ночь </p>
+      <div class="forecast__day-temp-right">
+        <p class="forecast__day-tempValue">${updateTemperature(
+          day.nightTemp
+        )}</p>
+        <img class="forecast__day-tempIcon"
+          src="${day.nightIcon}"
+          alt="Температура ночью" />
+      </div>
     </div>
   `;
   return card;

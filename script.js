@@ -8,12 +8,12 @@ const clock = document.getElementById("clock");
 const searchForm = document.querySelector("form");
 const inputCity = document.getElementById("search__input");
 const nameCity = document.getElementById("weather-city-name");
-const temperature = document.getElementById("weather-card__temperature");
+const temperature = document.getElementById("weather__card__temperature");
 const humidity = document.getElementById("humidity");
 const pressure = document.getElementById("pressure");
 const wind = document.getElementById("wind");
-const icon = document.getElementById("weather-card__weather-icon");
-const date = document.getElementById("weather-card__date");
+const icon = document.getElementById("weather__card__weather-icon");
+const date = document.getElementById("weather__card__date");
 function getNow() {
   return new Date();
 }
@@ -22,12 +22,11 @@ let isFahrenheit = false; // текущее состояние переключ�
 let forecastData = null; //для погоды
 const scrollSlider = document.querySelector("scroll-slider"); //слайдер
 const sliderTrack = document.querySelector(".weather-hour__list");
+const tomorrowBtn = document.getElementById("tomorrow");
+const weekLink = document.getElementById("weekLink");
 
-//автоматическая погода для определяемого города по координатам
-//сначала определим коорд --> с пом обратного геокодирования получим город --> получим погоду
 function getUsersCoords() {
   const MoscowCoord = { lat: 55.75583, lon: 37.6173 }; //по умолчанию
-  console.log(navigator.geolocation);
   if (!navigator.geolocation) {
     console.log(
       "Геолокация не поддерживается, используем координаты по умолчанию"
@@ -37,11 +36,10 @@ function getUsersCoords() {
   return new Promise((resolve) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        let lat = position.coords.latitude;
-        let lon = position.coords.longitude;
-        console.log("Геолокация успешно получена:", { lat, lon });
-        resolve({ lat, lon });
-        console.log({ lat, lon });
+        resolve({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
       },
       (err) => {
         console.log("Ошибка получения геолокации:", err);
@@ -50,6 +48,21 @@ function getUsersCoords() {
     );
   });
 }
+getUsersCoords().then(({ lat, lon }) => {
+  console.log("Используемые координаты:", lat, lon);
+  fetch(
+    `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      const nameRu = data[0].local_names.ru;
+      localStorage.setItem("weatherCity", nameRu);
+      getWeather(nameRu);
+    })
+    .catch((err) => {
+      console.error("Ошибка при получении данных:", err);
+    });
+});
 //____________________________________
 //функция для обновл с цельсия на фаренгейт
 function updateTemperature() {
@@ -142,7 +155,6 @@ function startClock() {
     setInterval(updateTime, 60000);
   }, delay);
 }
-
 //текущая дата
 function updateDate() {
   const today = new Date();
@@ -152,7 +164,8 @@ function updateDate() {
 
   date.textContent = `${day}.${month}.${year}`;
 }
-
+updateDate(); //обн даты
+startClock(); // для врем
 //функция которая показывает погоду через каждые 3 часа
 function showWeatherNextHours(data) {
   if (!data) return;
@@ -173,41 +186,60 @@ function showWeatherNextHours(data) {
     card.classList.add("weather-hour__list-card");
     card.innerHTML = `
       <div class="weather-hour__info">
-        <span>${hour.toString().padStart(2, "0")}:00</span>
+        <span id="info-time">${hour.toString().padStart(2, "0")}:00</span>
         <img class="weather-hour__info-icon"
               src="${iconSrc}"
               alt="погода" />
-        <span>${displayTemp}${unit}</span>
+        <span id="info-temp">${displayTemp}${unit}</span>
       </div>
       <div class="weather-hour__dark-bottom"></div>
     `;
     sliderTrack.appendChild(card);
   });
 }
+//погода на "завтра"
+function getForecastTomorrow(data) {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowStr = tomorrow.toISOString().split("T")[0];
+  console.log(data.list);
+  const tomorrowForecast = data.list.find(
+    (item) =>
+      item.dt_txt.includes(tomorrowStr) && item.dt_txt.includes("12:00:00")
+  );
+  if (!tomorrowForecast) return;
+  console.log(tomorrowForecast);
+  currentTempC = Math.round(tomorrowForecast.main.temp);
+  updateTemperature();
+  nameCity.textContent = nameCity.textContent;
+  icon.src = `https://openweathermap.org/img/wn/${tomorrowForecast.weather[0].icon}@2x.png`;
+  humidity.textContent = `${Math.round(tomorrowForecast.main.humidity)}%`;
+  const pressureMm = Math.round(tomorrowForecast.main.pressure * 0.750062);
+  pressure.textContent = `${pressureMm} мм рт. ст.`;
+  wind.textContent = `${Math.round(tomorrowForecast.wind.speed)} м/сек`;
+  const day = tomorrow.getDate().toString().padStart(2, "0");
+  const month = (tomorrow.getMonth() + 1).toString().padStart(2, "0");
+  date.textContent = `${day}.${month}.${tomorrow.getFullYear()}`;
+}
 
-//________________вызовы___________________________
-updateDate(); //обн даты
-startClock(); // для врем
+tomorrowBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (!forecastData) return;
 
-getUsersCoords().then(({ lat, lon }) => {
-  console.log("Используемые координаты:", lat, lon);
-  fetch(
-    `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      const nameRu = data[0].local_names.ru;
-      getWeather(nameRu);
-    })
-    .catch((err) => {
-      console.error("Ошибка при получении данных:", err);
-    });
+  getForecastTomorrow(forecastData);
+});
+
+weekLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  const city = nameCity.textContent;
+  window.location.href = `/week.html?city=${encodeURIComponent(city)}`;
 });
 
 searchForm.addEventListener("submit", (event) => {
-  event.preventDefault(); // чтобы страница не перезагружалась
+  event.preventDefault();
   const city = inputCity.value.trim();
   if (city) {
+    localStorage.setItem("weatherCity", city);
     getWeather(city);
   }
 });

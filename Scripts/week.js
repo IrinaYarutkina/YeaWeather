@@ -39,7 +39,7 @@ startClock();
 todayLink.addEventListener("click", (e) => {
   e.preventDefault();
   const city = inputCity.value;
-  window.location.href = `/index.html?city=${encodeURIComponent(
+  window.location.href = `index.html?city=${encodeURIComponent(
     city
   )}&day=today`;
 });
@@ -47,7 +47,7 @@ todayLink.addEventListener("click", (e) => {
 tomorrowLink.addEventListener("click", (e) => {
   e.preventDefault();
   const city = inputCity.value;
-  window.location.href = `/index.html?city=${encodeURIComponent(
+  window.location.href = `index.html?city=${encodeURIComponent(
     city
   )}&day=tomorrow`;
 });
@@ -77,7 +77,7 @@ if (searchForm) {
     event.preventDefault();
     const city = inputCity.value.trim();
     if (city) {
-      window.location.href = `/week.html?city=${encodeURIComponent(city)}`;
+      window.location.href = `week.html?city=${encodeURIComponent(city)}`;
     }
   });
 }

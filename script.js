@@ -212,7 +212,7 @@ searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const city = inputCity.value.trim();
   if (city) {
-    window.location.href = `/index.html?city=${encodeURIComponent(
+    window.location.href = `index.html?city=${encodeURIComponent(
       city
     )}&day=${dayFromUrl}`;
   }
@@ -235,7 +235,7 @@ todayLink.addEventListener("click", (e) => {
 weekLink.addEventListener("click", (e) => {
   e.preventDefault();
   const city = cityFromUrl || nameCity.textContent;
-  window.location.href = `/week.html?city=${encodeURIComponent(city)}`;
+  window.location.href = `week.html?city=${encodeURIComponent(city)}`;
 });
 
 //текущее время

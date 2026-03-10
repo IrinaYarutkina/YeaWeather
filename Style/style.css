@@ -314,7 +314,7 @@ main {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  font-size: clamp(12px, 2vw, 20px);
+  font-size: clamp(12px, 2vw, 18px);
   padding: 10px 0;
   font-family: "Poppins", sans-serif;
   font-weight: 500;

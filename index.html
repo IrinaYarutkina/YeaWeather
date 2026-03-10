@@ -37,10 +37,14 @@
         <div class="header__nav-right">
           <ul class="header__menu">
             <li class="header__menu-item">
-              <a class="header__menu-link" href="/index.html">Сегодня</a>
+              <a class="header__menu-link" id="todayLink" href="/index.html"
+                >Сегодня</a
+              >
             </li>
             <li class="header__menu-item">
-              <a href="#" class="header__menu-link" id="tomorrow">Завтра</a>
+              <a class="header__menu-link" id="tomorrow" href="/index.html"
+                >Завтра</a
+              >
             </li>
             <li class="header__menu-item">
               <a class="header__menu-link" id="weekLink" href="/week.html"
@@ -54,8 +58,7 @@
     <main>
       <!-- форма поиска -->
       <div class="search">
-        <form>
-          <!-- action="/search" method="GET" onsubmit="performSearch(event)" -->
+        <form id="searchForm">
           <input
             type="search"
             class="search__input"

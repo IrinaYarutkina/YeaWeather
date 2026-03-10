@@ -1,4 +1,3 @@
-//слайдер
 export default class ScrollSliderTrack extends HTMLElement {
   connectedCallback() {
     this.style.scrollBehavior = "smooth";

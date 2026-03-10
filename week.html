@@ -24,8 +24,8 @@
               width="65"
               class="header__logo-icon"
             />
+            <span class="header__text"> WeatherMe </span>
           </a>
-          <a class="header__text" href="/index.html"> WeatherMe </a>
           <div id="clock">00:00</div>
           <!-- переключатель -->
           <div class="header__switch">
@@ -38,13 +38,19 @@
         <div class="header__nav-right">
           <ul class="header__menu">
             <li class="header__menu-item">
-              <a class="header__menu-link" href="/index.html">Сегодня</a>
+              <a class="header__menu-link" id="todayLink" href="/index.html"
+                >Сегодня</a
+              >
             </li>
             <li class="header__menu-item">
-              <a class="header__menu-link" href="">Завтра</a>
+              <a class="header__menu-link" id="tomorrow" href="/index.html"
+                >Завтра</a
+              >
             </li>
             <li class="header__menu-item">
-              <a class="header__menu-link" href="/week.html">На 5 дней</a>
+              <a class="header__menu-link" id="weekLink" href="/week.html"
+                >На 5 дней</a
+              >
             </li>
           </ul>
         </div>
@@ -54,7 +60,7 @@
     <main>
       <h1 class="forecast__title">Погода на ближайшие дни</h1>
       <div class="search">
-        <form action="/search" method="GET">
+        <form id="searchForm">
           <input
             type="search"
             class="search__input"
@@ -78,6 +84,6 @@
         <div class="footer__copy">© 2026 WeatherMe. Учебный проект</div>
       </div>
     </footer>
-    <script src="./Scripts/week.js"></script>
+    <script src="/Scripts/week.js"></script>
   </body>
 </html>

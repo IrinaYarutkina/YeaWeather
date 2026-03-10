@@ -1,22 +1,25 @@
 const apiKey = "b013d70d956c0980b40ce06839a8ea38";
+
 const inputCity = document.getElementById("search__input");
-const searchForm = document.querySelector("form");
+const searchForm = document.getElementById("searchForm");
 const clock = document.getElementById("clock");
+const forecastWeek = document.querySelector(".forecast__week");
+const todayLink = document.getElementById("todayLink");
+const tomorrowLink = document.getElementById("tomorrow");
+
 let currentTempC = null;
 let forecastData = [];
 let isFahrenheit = false;
+
+const params = new URLSearchParams(window.location.search);
+const cityFromUrl = params.get("city") || "Москва";
+inputCity.value = cityFromUrl || "";
+getDataForWeek(cityFromUrl);
+
+//текущее время
 function getNow() {
   return new Date();
 }
-const forecastWeek = document.querySelector(".forecast__week");
-const params = new URLSearchParams(window.location.search);
-
-let city = params.get("city") || localStorage.getItem("weatherCity");
-if (city) {
-  inputCity.value = city;
-  getDataForWeek(city);
-}
-//текущее время
 function updateTime() {
   const hours = String(getNow().getHours()).padStart(2, "0");
   const minutes = String(getNow().getMinutes()).padStart(2, "0");
@@ -31,6 +34,23 @@ function startClock() {
   }, delay);
 }
 startClock();
+
+//переход
+todayLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  const city = inputCity.value;
+  window.location.href = `/index.html?city=${encodeURIComponent(
+    city
+  )}&day=today`;
+});
+
+tomorrowLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  const city = inputCity.value;
+  window.location.href = `/index.html?city=${encodeURIComponent(
+    city
+  )}&day=tomorrow`;
+});
 
 //функция для обновл с цельсия на фаренгейт
 function updateTemperature(temp) {
@@ -52,13 +72,16 @@ toggle.addEventListener("click", () => {
 });
 
 //поиск города в форме
-searchForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const city = inputCity.value.trim();
-  if (city) {
-    getDataForWeek(city);
-  }
-});
+if (searchForm) {
+  searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const city = inputCity.value.trim();
+    if (city) {
+      window.location.href = `/week.html?city=${encodeURIComponent(city)}`;
+    }
+  });
+}
+
 //получаем данные из АПИ
 function getDataForWeek(city) {
   if (!city) return;
@@ -72,8 +95,6 @@ function getDataForWeek(city) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
-
       const filteredDays = getFilteredObj(data);
       forecastData = filteredDays;
       renderCards(filteredDays);
@@ -122,11 +143,13 @@ function getFilteredObj(data) {
       }
     }
   });
+  const todayStr = new Date().toISOString().split("T")[0];
   const result = Object.values(days).filter(
-    (day) => day.dayTemp !== null || day.nightTemp !== null
+    (day) =>
+      (day.dayTemp !== null || day.nightTemp !== null) && day.date > todayStr
   );
   console.log(result);
-  return result.slice(1, 6);
+  return result.slice(0, 5);
 }
 
 //для карточек с погодой
